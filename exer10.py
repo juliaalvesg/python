@@ -23,41 +23,60 @@ personagem = input("Escolha entre o personagem MAGO ou GUERREIRO -> ")
 
 # Para o usuario saber que o jogo comecou sera printado na tela 
 print("O JOGO FOI INICIADO")
-acao = input("Voce tera 4 opcoes: \n 1- Atacar \n 2- Defender \n 3- Curar \n 4- Descansar")
 
-vida_monstro = 20 
+vida_monstro = 20
+ataque_inimigo = 10 
 
 if personagem == "mago":
-        poder_mago = random.randint(7,15)
+    poder_mago = random.randint(7,15)
+    acao = input("Voce tera 4 opcoes: \n 1- Atacar \n 2- Defender \n 3- Curar \n 4- Descansar")
+    if acao == "1":
+        # Execucao caso o usuario escolha mago
+        poder_final = poder_mago - 2
         dano_mago = random.randint(0,8)
-if personagem == "guerreiro":
-        dano_guerreiro = random.randint(3,10)
-        poder_guerreiro = random.randint(5,10)
-
-if acao == "1":
-    # Execucao caso o usuario escolha mago 
-    if personagem == "mago":
-        poder_final = poder_mago - 2 
-
-    # Execucao caso o usuario escolha guerreiro 
-    if personagem == "guerreiro":
-        poder_final = poder_guerreiro - 2 
-
-if acao == "2":
-    if personagem == "mago":
-        poder_mago = poder_mago - 1 
-    
-    else:
-        poder_guerreiro = poder_guerreiro - 1 
-
-if acao == "3":
-    if personagem == "mago":
+    if acao == "2":
+        ataque_inimigo = ataque_inimigo - 1
+        poder_mago = poder_mago - 1
+    if acao == "3":
         dano_mago = dano_mago - 2 
-    if personagem == "guerreiro": 
-        dano_guerreiro = dano_guerreiro - 1
+    if acao == "4":
+        recuperacao = random.randint(1,5)
+        porder_mago = poder_mago + recuperacao
+    print(f"Ótima partida, até o momento voce está com {poder_final} de poder e {dano_mago} de danos")
 
-if acao == "4":
-    recuperacao = random.randint(1,5)
-    porder_mago = poder_mago + recuperacao
-    poder_guerreiro = poder_guerreiro + recuperacao
+if personagem == "guerreiro":
+    poder_guerreiro = random.randint(5,10)
+    dano_guerreiro = random.randint(3,10)
+    acao = input("Voce tera 4 opcoes: \n 1- Atacar \n 2- Defender \n 3- Curar \n 4- Descansar")
+    if acao == "1":
+        # Execucao caso o usuario escolha guerreiro 
+        if personagem == "guerreiro":
+            poder_guerreiro = poder_guerreiro - 2 
+    if acao == "2":
+        ataque_inimigo = ataque_inimigo - 1 
+    if acao == "3":
+        dano_guerreiro = dano_guerreiro - 1
+    if acao == "4":
+        recuperacao = random.randint(1,5)
+        poder_guerreiro = poder_guerreiro + recuperacao
+    print(f"Ótima partida, até o momento voce está com {poder_guerreiro} de poder e {dano_guerreiro} de danos")
+
+print("Monstros gerados!!")
+
+while True:
+    if vida_monstro > 0:
+        acao_monstro = random.randint("Atacar","Defender")
+        if acao_monstro == "Atacar":
+            if personagem == "mago":
+                dano_mago = dano_mago + 3
+            else:
+                dano_guerreiro = dano_guerreiro + 3 
+        else: 
+            vida_monstro = 20
+    else: 
+        i = input("O mostro morreu, deseja continuar ou sair do jogo? Aperte 2 para continuar e 2 para sair ->")
+        if i == "1":
+            break
+        else:
+
 
